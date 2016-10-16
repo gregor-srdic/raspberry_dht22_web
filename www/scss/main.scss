@@ -1,6 +1,37 @@
+* {
+  font-family: "Ubuntu", sans-serif !important; 
+}
 #chart {
     height:400px;
+    svg {
+        .nv-y2.nv-axis .tick text {
+            font-size:14px;
+            transform:translateX(8px);
+        }
+        .nv-y1.nv-axis .tick text {
+            font-size:14px;
+            transform:translateX(-8px);
+        }
+        .nv-x.nv-axis .tick text {
+            font-size:14px;
+            transform:translateY(4px);
+        }
+        .nv-barsWrap {
+            content:'';
+            position:absolute;
+            height:30px;
+            width:100%;
+            background: red;
+        }
+    }
 }
 #fusion-chart-container {
     
+}
+.chart-toolbar {
+    padding:8px;
+    text-align: left;
+    &>div {
+        line-height: 24px; 
+    }
 }

@@ -1,5 +1,6 @@
 moment.locale('sl');
-var displayFormats = {
+var demo = false,
+    displayFormats = {
     momentDateTime : 'LL ob LT',
     momentTime : 'LT',
     momentRequestDate : 'YYYY-MM-DD'
@@ -36,7 +37,7 @@ function drawD3Chart(date,data){
     nv.addGraph(function() {
         d3.time.scale.utc();
         var chart = nv.models.linePlusBarChart()
-                .margin({top: 20, right: 70, bottom: 20, left: 70})
+                .margin({top: 20, right: 70, bottom: 50, left: 70})
                 .focusEnable(false)        
                 .x(function(d,i) {return d[0]; })
                 .y(function(d,i) {return d[1]; })
@@ -48,9 +49,11 @@ function drawD3Chart(date,data){
             var x = chartData[0].values[index][0],
                 t = chartData[0].values[index][1],
                 h =  chartData[1].values[index][1];
-            return '<p><b>' +  moment(x).format(displayFormats.momentDateTime) + '</b></p>' +
-                   '<p> Temperature: <b>' +  d3.format('.1f')(t) + '°</b></p>' +
-                   '<p> Humidity: <b>' +  d3.format('.1f')(h) + '%</b></p>'   
+            return  '<div class="chart-toolbar">' +
+                    '<div class="timestamp"><b>' +  moment(x).format(displayFormats.momentDateTime) + '</b></div>' +
+                    '<div class="temperature">Temperature: <b>' +  d3.format('.1f')(t) + '°</b></div>' +
+                    '<div class="humidity">Humidity: <b>' +  d3.format('.1f')(h) + '%</b></div>' +
+                    '</div>'  
         });
         chart.xScale(d3.time.scale());
         chart.xAxis
@@ -316,19 +319,26 @@ function prepareDataForD3ChartDisplay(startDate,step,data){
 function getD3TicksValues(d3data,count){
     d3data = d3data[0].values;
     var l = d3data.length,
-        ticksValues = [];
+        ticksValues = [d3data[0][0]];
     var d = Math.floor(l/count);
     var x = d;
     while(x<=l-d){
         ticksValues.push(d3data[x][0]);
         x += d;
     }
+    ticksValues.push(d3data[l-1][0]);
     return ticksValues;
 }
 function getDataFromService(date){
     var dfd = jQuery.Deferred();
-    jQuery.getJSON( 'http://192.168.0.19:8888/'+date,{},function(r){
-        if(r&&r.length>0){
+    if(demo)
+        dfd.resolve(getDemoData());
+    else
+        jQuery.getJSON( 'http://192.168.0.19:8888/'+date,{},function(r){
+            dfd.resolve(r);
+        });
+    dfd.then(function(r){
+         if(r&&r.length>0){
             for(var i=0; i<r.length; i++)
                 r[i].d = moment(r[i].d);
             r.sort(function(a,b){
