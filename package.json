@@ -1,0 +1,32 @@
+{
+  "name": "raspberry-pi-dht22-web",
+  "version": "1.0.0",
+  "description": "Server and Web client for raspberry pi with dht22 humidity and temperature sensor",
+  "main": "index.js",
+  "dependencies": {
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gregor-srdic/raspberry_dht22_web.git"
+  },
+  "keywords": [
+    "Raspberry",
+    "DHT",
+    "DHT22",
+    "Web",
+    "Chart",
+    "Temperature",
+    "Humidity"
+  ],
+  "author": "Gregor Srdic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gregor-srdic/raspberry_dht22_web/issues"
+  },
+  "homepage": "https://github.com/gregor-srdic/raspberry_dht22_web#readme"
+}
