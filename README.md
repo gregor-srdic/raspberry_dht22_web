@@ -3,6 +3,7 @@ http://imgur.com/a/Xw3ny
 
 ###DHT 22 Sensor connected to the Raspberry Pi Board
 ![Sensor connected Raspberry Pi](http://imgur.com/lVuFEXh)
+[Imgur](http://i.imgur.com/lVuFEXh.jpg)
 
 ###Web page, displaying measured values with d3.js chart
 ![Web page](http://imgur.com/k8wvEZ5)
